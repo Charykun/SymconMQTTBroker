@@ -1,0 +1,15 @@
+{
+    "elements":
+    [
+        { "name": "Topic", "type": "ValidationTextBox", "caption": "Topic" },
+        { "name": "DataType", "type": "Select", "caption": "DataType",
+            "options":
+            [
+                { "label": "Boolean", "value": 0},
+                { "label": "Integer", "value": 1},
+                { "label": "Float", "value": 2},
+                { "label": "String", "value": 3}
+            ]
+        }
+    ]
+}

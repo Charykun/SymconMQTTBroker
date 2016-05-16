@@ -1,0 +1,14 @@
+{
+	"id": "{9D2ACF7A-3A59-4BC9-9DE2-5D87D37A2C48}",
+	"name": "MQTTopic",
+	"type": 3,
+	"vendor": "MQTT",
+	"aliases":
+	[
+            "MQTT Topic"
+	],
+	"parentRequirements": [""],
+	"childRequirements": [],
+	"implemented": ["{60502747-993B-492A-BAD0-C61F07CEFADB}"],
+	"prefix": "MQTTopic"
+}

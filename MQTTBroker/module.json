@@ -1,0 +1,14 @@
+{
+	"id": "{DE676D56-3FC1-4DD8-B65F-7116F48F03CE}",
+	"name": "MQTTBroker",
+	"type": 2,
+	"vendor": "",
+	"aliases":
+	[
+            "MQTT Broker"
+	],
+	"parentRequirements": ["{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}"],
+	"childRequirements": ["{60502747-993B-492A-BAD0-C61F07CEFADB}"],
+	"implemented": ["{018EF6B5-AB94-40C6-AA53-46943E824ACF}"],
+	"prefix": "MQTTBroker"
+}

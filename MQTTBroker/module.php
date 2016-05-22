@@ -41,8 +41,8 @@ class MQTTBroker extends IPSModule
         {
             $data = utf8_decode($data->Buffer);
             $this->SendDebug("RECEIVED", $data, 0);
-            do{$msg = $this->Message_Read($data);}
-            while($msg != null);
+            do{$data = $this->Message_Read($data);}
+            while($data != null);
         }
     }
 

@@ -150,6 +150,74 @@ class MQTTBroker extends IPSModule
     {
         return 256 * ord($data[0]) + ord($data[1]);
     }
+
+    /**
+     * ForwardData
+     * @param $JSONString
+     */
+    public function ForwardData($JSONString)
+    {
+        $data = json_decode($JSONString);
+        if($data->DataID == "{3EE22410-A758-41D9-95CE-AEF3D293FC5D}")
+        {
+            $this->Publish($data->Topic, $data->Content, $data->QOS, $data->Retrain);            
+        }        
+    }
+
+    private function Publish($topic, $content, $qos = 0, $retrain = 0)
+    {
+        $i = 0;
+        $buffer = "";
+        $buffer .= $this->StrWriteString($topic, $i);
+        if($qos)
+        {
+            $id = 0;
+            $buffer .= chr($id >> 8); $i++;
+            $buffer .= chr($id % 256); $i++;
+        }
+        $buffer .= $content;
+        $i += strlen($content);
+        $head = " ";
+        $cmd = 0x30;
+        if($qos)
+        {
+            $cmd += $qos << 1;
+        }
+        if($retrain)
+        {
+            $cmd += 1;
+        }
+        $head{0} = chr($cmd);
+        $head .= $this->SetMsgLength($i);
+        $this->SendDebug("TRANSMIT", $head . $buffer, 0);
+        return $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $head . $buffer)));
+    }
+
+    private function StrWriteString($str, &$i)
+    {
+        $len = strlen($str);
+        $msb = $len >> 8;
+        $lsb = $len % 256;
+        $ret = chr($msb);
+        $ret .= chr($lsb);
+        $ret .= $str;
+        $i += ($len+2);
+        return $ret;
+    }
+
+    private function SetMsgLength($len)
+    {
+        $string = "";
+        do
+        {
+            $digit = $len % 128;
+            $len = $len >> 7;
+            if($len > 0) $digit = ($digit | 0x80);
+            $string .= chr($digit);
+        }
+        while($len > 0);
+        return $string;
+    }
 }
 
 class Message

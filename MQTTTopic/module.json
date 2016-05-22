@@ -7,7 +7,7 @@
 	[
             "MQTT Topic"
 	],
-	"parentRequirements": [""],
+	"parentRequirements": ["{3EE22410-A758-41D9-95CE-AEF3D293FC5D}"],
 	"childRequirements": [],
 	"implemented": ["{60502747-993B-492A-BAD0-C61F07CEFADB}"],
 	"prefix": "MQTTopic"
